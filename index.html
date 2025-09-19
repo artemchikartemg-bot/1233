@@ -1,0 +1,22 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<body>
+  <input id="message" placeholder="Введите сообщение">
+  <button onclick="sendMessage()">Отправить</button>
+  <div id="chat"></div>
+
+  <script>
+    const ws = new WebSocket('wss://your-app-name.up.railway.app');
+    ws.onmessage = (event) => {
+      const chat = document.getElementById('chat');
+      chat.innerHTML += `<p>${event.data}</p>`;
+    };
+
+    function sendMessage() {
+      const message = document.getElementById('message').value;
+      ws.send(message);
+    }
+  </script>
+</body>
+</html>
